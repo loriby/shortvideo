@@ -1,83 +1,317 @@
 <template>
-	<view class="content">
-		<view v-if="hasLogin" class="hello">
-			<view class="title">
-				您好 {{userName}}，您已成功登录。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
-			</view>
-		</view>
-		<view v-if="!hasLogin" class="hello">
-			<view class="title">
-				您好 游客。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
-			</view>
-		</view>
+	<view class="page">
+		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
+			<swiper-item v-for="item in videoList" :key="item.id">
+				<video class="video" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
+				 :show-center-play-btn="false"></video>
+				 <view class="video_info">
+					 <image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></image>
+					 <image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></image>
+					 <view class="info_count">21312</view>
+				 </view>
+				 <view class="video-msg">
+					 <view class="msg_header">@古风小姐姐</view>
+					 <view class="msg_cont">等哈瞌睡的就啊上课接电话撒到家啊快乐</view>
+				 </view>
+				<!-- <view class="ad-view">
+					<ad adpid="1111111111" @load="onload" type="video" @close="onclose" @error="onerror" @downloadchange="ondownloadchange"></ad>
+				</view> -->
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
-
 <script>
-	import {
-		mapState
-	} from 'vuex'
+	import AD from '../../utils/ad.js';
+	const videoData = [{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4'
+		},
+		{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-02.mp4'
+		},
+		{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-03.mp4'
+		},
+		{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4'
+		},
+		{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-02.mp4'
+		},
+		{
+			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-03.mp4'
+		}
+	];
 
 	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
-		onLoad() {
-			// if (!this.hasLogin) {
-			// 	uni.showModal({
-			// 		title: '未登录',
-			// 		content: '您未登录，需要登录后才能继续',
-			// 		/**
-			// 		 * 如果需要强制登录，不显示取消按钮
-			// 		 */
-			// 		showCancel: !this.forcedLogin,
-			// 		success: (res) => {
-			// 			if (res.confirm) {
-			// 				/**
-			// 				 * 如果需要强制登录，使用reLaunch方式
-			// 				 */
-			// 				if (this.forcedLogin) {
-			// 					uni.reLaunch({
-			// 						url: '../login/login'
-			// 					});
-			// 				} else {
-			// 					uni.navigateTo({
-			// 						url: '../login/login'
-			// 					});
-			// 				}
-			// 			}
-			// 		}
-			// 	});
-			// }
+		data() {
+			return {
+				circular: true,
+				videoList: [{
+						id: "video0",
+						src: "",
+						img: ""
+					},
+					{
+						id: "video1",
+						src: "",
+						img: ""
+					},
+					{
+						id: "video2",
+						src: "",
+						img: ""
+					}
+				],
+				videoDataList: [],
+				adList: [],
+				adData: {}
+			}
+		},
+		onLoad(e) {},
+		onReady() {
+			// this.init();
+			// this.getData();
+
+			for (let i = 0; i < 4; i++) {
+				this.adList.push({
+					id: i,
+					adpid: "1111111111"
+				})
+			}
+
+
+
+			this._adpid = 1507000689
+		},
+		methods: {
+			init() {
+				this._videoIndex = 0;
+				this._videoContextList = [];
+				for (var i = 0; i < this.videoList.length; i++) {
+					this._videoContextList.push(uni.createVideoContext('video' + i, this));
+				}
+				this._videoDataIndex = 0;
+			},
+			getData(e) {
+				this.videoDataList = videoData;
+				setTimeout(() => {
+					this.updateVideo(true);
+				}, 200)
+			},
+			onSwiperChange(e) {
+				let currentIndex = e.detail.current;
+				if (currentIndex === this._videoIndex) {
+					return;
+				}
+
+				let isNext = false;
+				if (currentIndex === 0 && this._videoIndex === this.videoList.length - 1) {
+					isNext = true;
+				} else if (currentIndex === this.videoList.length - 1 && this._videoIndex === 0) {
+					isNext = false;
+				} else if (currentIndex > this._videoIndex) {
+					isNext = true;
+				}
+
+				if (isNext) {
+					this._videoDataIndex++;
+				} else {
+					this._videoDataIndex--;
+				}
+
+				if (this._videoDataIndex < 0) {
+					this._videoDataIndex = this.videoDataList.length - 1;
+				} else if (this._videoDataIndex >= this.videoDataList.length) {
+					this._videoDataIndex = 0;
+				}
+
+				this.circular = (this._videoDataIndex != 0);
+
+				if (this._videoIndex >= 0) {
+					this._videoContextList[this._videoIndex].pause();
+					this._videoContextList[this._videoIndex].seek(0);
+				}
+
+				this._videoIndex = currentIndex;
+
+				setTimeout(() => {
+					this.updateVideo(isNext);
+				}, 200);
+			},
+			getNextIndex(isNext) {
+				let index = this._videoIndex + (isNext ? 1 : -1);
+				if (index < 0) {
+					return this.videoList.length - 1;
+				} else if (index >= this.videoList.length) {
+					return 0;
+				}
+				return index;
+			},
+			getNextDataIndex(isNext) {
+				let index = this._videoDataIndex + (isNext ? 1 : -1);
+				if (index < 0) {
+					return this.videoDataList.length - 1;
+				} else if (index >= this.videoDataList.length) {
+					return 0;
+				}
+				return index;
+			},
+			updateVideo(isNext) {
+				this.$set(this.videoList[this._videoIndex], 'src', this.videoDataList[this._videoDataIndex].src);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)].src);
+				setTimeout(() => {
+					this._videoContextList[this._videoIndex].play();
+				}, 200);
+				console.log("v:" + this._videoIndex + " d:" + this._videoDataIndex + "; next v:" + this.getNextIndex(
+					isNext) + " next d:" + this.getNextDataIndex(isNext));
+			},
+
+
+			getAdData: function(e) {
+				// 仅APP平台支持
+				plus.ad.getAds({
+						adpid: '1111111111', // 替换为自己申请获取的广告位标识，此广告位标识仅在HBuilderX标准基座中有效，仅用于测试
+						count: 1, // 广告数量，默认 3
+						width: 300 // 根据宽度获取合适的广告(单位px)
+					},
+					(res) => {
+						this.adData = res.ads[0];
+						console.log(this.adData);
+					},
+					(err) => {
+						console.log(err);
+					}
+				)
+			},
+			onload(e) {
+				console.log("onload");
+			},
+			onclose(e) {
+				console.log("onclose: " + e.detail);
+			},
+			onerror(e) {
+				console.log("onerror: " + e.detail.errCode + " message:: " + e.detail.errMsg);
+			},
+			ondownloadchange(e) {
+				console.log("downloadchanged: " + JSON.stringify(e.detail));
+			},
+
+			showAd() {
+				AD.show(this._adpid, (res) => {
+					console.log("onclose")
+					console.log(res)
+
+					// 用户点击了【关闭广告】按钮
+					if (res && res.isEnded) {
+						// 正常播放结束
+						console.log("onClose " + res.isEnded);
+					} else {
+						// 播放中途退出
+						console.log("onClose " + res.isEnded);
+					}
+
+					// 可选预加载下一条广告数据，减少加载等待时间，调用此 API 不会显示loading，不影响业务
+					// AD.load(this._adpid)
+				}, (err) => {
+					// 广告无法显示，输出错误信息，可以采集数据上报以便分析
+					console.log(err) // {code: code, errMsg: message}
+				})
+			},
+			
+			// 跳转到详细页
+			goDetail () {
+				uni.navigateTo({
+					url:'../detail/detail'
+				})
+			}
 		}
 	}
 </script>
 
-<style>
-	.hello {
+<style scoped>
+	/* #ifndef APP-PLUS */
+	page {
+		width: 100%;
+		min-height: 100%;
 		display: flex;
+	}
+
+	/* #endif */
+
+	.page {
 		flex: 1;
+		width: 750rpx;
 		flex-direction: column;
+		display: flex;
+		align-items: stretch;
+		align-content: flex-start;
+		position: relative;
+		border: 0 solid #000;
+		box-sizing: border-box;
 	}
 
-	.title {
-		color: #8f8f94;
-		margin-top: 25px;
+	.swiper {
+		flex: 1;
+		background-color: #1f1f26;
 	}
 
-	.ul {
-		font-size: 15px;
-		color: #8f8f94;
-		margin-top: 25px;
+	.swiper-item {
+		flex: 1;
+		position: relative;
 	}
 
-	.ul>view {
-		line-height: 25px;
+	.video {
+		flex: 1;
+		/* #ifndef APP-PLUS */
+		width: 100%;
+		/* #endif */
+		position: relative;
+		border: 0 solid #000;
+		box-sizing: border-box;
+		height: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.video_info{
+		position: absolute;
+		bottom: 246upx;
+		right: 32upx;
+		width: 80upx;
+	}
+	.info_tx{
+		width: 80upx;
+		height: 80upx;
+		border: 2upx solid #fff;
+		border-radius: 40upx;
+		display: block;
+	}
+	.info_like{
+		width: 60upx;
+		height: auto;
+		margin: 0 auto;
+		display: block;
+		margin-top: 62upx;
+	}
+	.info_count{
+		font-size: 32upx;
+		color: #fff;
+		text-align: center;
+	}
+	.video-msg{
+		margin: 0 30upx;
+		position: absolute;
+		left: 0;
+		bottom: 30upx;
+	}
+	.msg_header{
+		font-size: 36upx;
+		color: #fff;
+	}
+	.msg_cont{
+		font-size: 28upx;
+		color: #fff;
+		margin-top: 16upx;
+		min-height: 60upx;
 	}
 </style>

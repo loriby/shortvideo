@@ -3,7 +3,9 @@
 		{
 			"path": "pages/main/main",
 			"style": {
-				"navigationBarTitleText": "登录模板"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/login/login",
@@ -23,24 +25,36 @@
 		}, {
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/store/store",
 			"style": {
-				"navigationBarTitleText": "商城"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/task/task",
 			"style": {
-				"navigationBarTitleText": "任务"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}
+        ,{
+            "path" : "pages/detail/detail",
+            "style" : {
+				"navigationBarBackgroundColor": "#16161B"
+			}
+        }
     ],
 	"tabBar": {
-		"color": "#7a7e83",
-		"selectedColor": "#0faeff",
-		"backgroundColor": "#ffffff",
+		"color": "#686c6f",
+		"selectedColor": "#dfb67d",
+		"backgroundColor": "#1f1f26",
 		"list": [{
 			"pagePath": "pages/main/main",
 			"text": "首页",
