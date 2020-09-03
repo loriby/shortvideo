@@ -14,7 +14,7 @@
 					  <input class="uni-input" name="input" placeholder="请输入身份证号" />
 				  </view>
 				  <view class="uni-btn-v">
-					  <button class="sub-btn" form-type="submit">确定</button>
+					<button class="sub-btn" form-type="submit">确定</button>
 				  </view>
 				</form>
 			  </view>
