@@ -2,17 +2,17 @@
 	<view class="page">
 		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
 			<swiper-item v-for="item in videoList" :key="item.id">
-				<video class="video" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
-				 :show-center-play-btn="false"></video>
-				 <view class="video_info">
-					 <image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></image>
-					 <image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></image>
-					 <view class="info_count">21312</view>
-				 </view>
-				 <view class="video-msg">
-					 <view class="msg_header">@古风小姐姐</view>
-					 <view class="msg_cont">等哈瞌睡的就啊上课接电话撒到家啊快乐</view>
-				 </view>
+				<video class="video" :src="item.src" :controls="false" :loop="true"
+				 :show-center-play-btn="false" autoplay></video>
+				 <cover-view class="video_info">
+					 <cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
+					 <cover-image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></cover-image>
+					 <cover-view class="info_count">21312</cover-view>
+				 </cover-view>
+				 <cover-view class="video-msg">
+					 <cover-view class="msg_header">@古风小姐姐</cover-view>
+					 <cover-view class="msg_cont">等哈瞌睡的就啊上课接电话撒到家啊快乐</cover-view>
+				 </cover-view>
 				<!-- <view class="ad-view">
 					<ad adpid="1111111111" @load="onload" type="video" @close="onclose" @error="onerror" @downloadchange="ondownloadchange"></ad>
 				</view> -->
@@ -69,8 +69,8 @@
 		},
 		onLoad(e) {},
 		onReady() {
-			// this.init();
-			// this.getData();
+			this.init();
+			this.getData();
 
 			for (let i = 0; i < 4; i++) {
 				this.adList.push({
@@ -262,15 +262,11 @@
 
 	.video {
 		flex: 1;
-		/* #ifndef APP-PLUS */
 		width: 100%;
-		/* #endif */
 		position: relative;
 		border: 0 solid #000;
 		box-sizing: border-box;
 		height: 100%;
-		left: 50%;
-		transform: translateX(-50%);
 	}
 	
 	.video_info{
@@ -278,6 +274,7 @@
 		bottom: 246upx;
 		right: 32upx;
 		width: 80upx;
+		z-index: 99999;
 	}
 	.info_tx{
 		width: 80upx;
