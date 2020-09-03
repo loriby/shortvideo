@@ -131,4 +131,11 @@
 	button.primary {
 		background-color: #0faeff;
 	}
+	
+	.clear{
+		clear: both;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
 </style>
