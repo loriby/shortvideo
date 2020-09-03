@@ -18,7 +18,7 @@
 			</view>
 		</view>
 		<view class="uni-flex uni-row con-list header-list-box">
-			<view class="flex-item uni-bg-black">
+			<view class="flex-item uni-bg-black" @click="goUrl('/pages/team/team')">
 				<image src="/static/img/tuandui.png" mode=""></image>
 				<text>我的团队</text>
 			</view>
@@ -74,6 +74,12 @@
 						url: '../login/login',
 					});
 				}
+			},
+			
+			goUrl (url) {
+				uni.navigateTo({
+					url:url
+				})
 			}
 		}
 	}
