@@ -3,17 +3,23 @@
 		{
 			"path": "pages/main/main",
 			"style": {
-				"navigationBarTitleText": "登录模板"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/reg/reg",
 			"style": {
-				"navigationBarTitleText": "注册"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/pwd/pwd",
@@ -23,43 +29,69 @@
 		}, {
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/store/store",
 			"style": {
-				"navigationBarTitleText": "商城"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/task/task",
 			"style": {
-				"navigationBarTitleText": "任务"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}
+        ,{
+            "path" : "pages/detail/detail",
+            "style" : {
+				"navigationBarBackgroundColor": "#16161B"
+			}
+        },
+		{
+		   "path" : "pages/task/attestation",
+			"style" : {
+				"navigationBarTitleText": "实名认证",
+				"navigationBarBackgroundColor": "#1F1F26"
+			}
+		}
+        ,{
+            "path" : "pages/team/team",
+            "style" : {
+            	"navigationBarTitleText": "我的团队",
+            	"navigationBarBackgroundColor": "#1F1F26"
+            }
+        }
     ],
 	"tabBar": {
-		"color": "#7a7e83",
-		"selectedColor": "#0faeff",
-		"backgroundColor": "#ffffff",
+		"color": "#686c6f",
+		"selectedColor": "#dfb67d",
+		"backgroundColor": "#1f1f26",
 		"list": [{
 			"pagePath": "pages/main/main",
-			"text": "首页",
-			"iconPath": "static/img/home.png",
-			"selectedIconPath": "static/img/homeHL.png"
+			"text": "短视频",
+			"iconPath": "static/img/shipin.png",
+			"selectedIconPath": "static/img/shipincheck.png"
 		}, {
 			"pagePath": "pages/task/task",
 			"text": "任务",
-			"iconPath": "static/img/user.png",
-			"selectedIconPath": "static/img/userHL.png"
+			"iconPath": "static/img/renwu.png",
+			"selectedIconPath": "static/img/renwucheck.png"
 		}, {
 			"pagePath": "pages/store/store",
 			"text": "商城",
-			"iconPath": "static/img/user.png",
-			"selectedIconPath": "static/img/userHL.png"
+			"iconPath": "static/img/shangcheng.png",
+			"selectedIconPath": "static/img/shangchengcheck.png"
 		}, {
 			"pagePath": "pages/user/user",
 			"text": "我的",
-			"iconPath": "static/img/user.png",
+			"iconPath": "static/img/wode.png",
 			"selectedIconPath": "static/img/userHL.png"
 		}]
 	},

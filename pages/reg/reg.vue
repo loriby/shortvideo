@@ -1,22 +1,16 @@
 <template>
-	<view class="content">
-		<view class="input-group">
-			<view class="input-row border">
-				<text class="title">账号：</text>
-				<m-input type="text" focus clearable v-model="account" placeholder="请输入账号"></m-input>
-			</view>
-			<view class="input-row border">
-				<text class="title">密码：</text>
-				<m-input type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
-			</view>
-			<view class="input-row">
-				<text class="title">邮箱：</text>
-				<m-input type="text" clearable v-model="email" placeholder="请输入邮箱"></m-input>
-			</view>
+	<view class="reg-content">
+		<view class="login-tab">
+			<view class="tab-login" @click="goLogin">登录</view>
+			<view class="tab-resgister">注册</view>
+			<view class="clear"></view>
 		</view>
-		<view class="btn-row">
-			<button type="primary" class="primary" @tap="register">注册</button>
+		<view class="login-input-group">
+			<m-input class="login-ipt" type="text" clearable focus v-model="account" placeholder="请输入手机号/邮箱"></m-input>
+			<m-input class="login-ipt" type="password" displayable v-model="password" placeholder="请输入登录密码"></m-input>
+			<m-input class="login-ipt" type="text" v-model="email" placeholder="请输入验证码"></m-input>
 		</view>
+		<button type="primary" class="login-btn" @tap="bindLogin">注册</button>
 	</view>
 </template>
 
@@ -75,11 +69,62 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			
+			goLogin () {
+				uni.navigateTo({
+					url:'../login/login'
+				})
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
+page {
+		background: #1F1F26;
+	}
 
+	.login-tab {
+		margin: 160upx 0 0 80upx;
+		color: #DFB67D;
+		height: 80upx;
+	}
+
+	.tab-login {
+		font-size: 32upx;
+		float: left;
+		margin-right: 54upx;
+		height: 100%;
+		line-height: 1.5;
+	}
+
+	.tab-resgister {
+		font-size: 52upx;
+		height: 100%;
+		float: left;
+		line-height: 1;
+	}
+
+	.login-input-group {
+		width: 90%;
+		margin: 100upx 5% 0;
+		color: #fff;
+	}
+
+	.login-ipt {
+		width: 100%;
+		height: 80upx;
+		margin-bottom: 40upx;
+		border-bottom: 2upx solid #292932;
+	}
+	
+	.login-btn{
+		width: 70%;
+		margin: 140upx 15% 0;
+		border-radius: 40upx;
+		height: 80upx;
+		background: #DFB67D;
+		line-height: 80upx;
+	}
 </style>
