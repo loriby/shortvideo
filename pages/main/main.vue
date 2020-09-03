@@ -2,8 +2,8 @@
 	<view class="page">
 		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
 			<swiper-item v-for="item in videoList" :key="item.id">
-				<video class="video" :src="item.src" :controls="false" :loop="true"
-				 :show-center-play-btn="false" autoplay></video>
+				<video class="video"  :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
+				 :show-center-play-btn="false"></video>
 				 <cover-view class="video_info">
 					 <cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
 					 <cover-image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></cover-image>

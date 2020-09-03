@@ -48,6 +48,7 @@
 <style>
 .cont{
 	background: #1F1F26;
+	width: 100%;
 }
 .cont .sub-btn{
 	width: 480upx;

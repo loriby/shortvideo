@@ -231,58 +231,104 @@ var render = function() {
     "v-uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
     [
-      _c("v-uni-video", {
-        staticClass: _vm._$g(1, "sc"),
-        attrs: {
-          src:
-            "https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4",
-          controls: false,
-          loop: true,
-          "show-center-play-btn": false,
-          autoplay: true,
-          _i: 1
-        }
-      }),
       _c(
-        "v-uni-cover-view",
-        { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
-        [
-          _c("v-uni-cover-image", {
-            staticClass: _vm._$g(3, "sc"),
-            attrs: { src: _vm._$g(3, "a-src"), mode: "widthFix", _i: 3 },
-            on: {
-              click: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
+        "v-uni-swiper",
+        {
+          staticClass: _vm._$g(1, "sc"),
+          attrs: { circular: _vm._$g(1, "a-circular"), vertical: true, _i: 1 },
+          on: {
+            change: function($event) {
+              return _vm.$handleViewEvent($event)
             }
-          }),
-          _c("v-uni-cover-image", {
-            staticClass: _vm._$g(4, "sc"),
-            attrs: { src: _vm._$g(4, "a-src"), mode: "widthFix", _i: 4 }
-          }),
-          _c(
-            "v-uni-cover-view",
-            { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
-            [_vm._v("21312")]
+          }
+        },
+        _vm._l(_vm._$g(2, "f"), function(item, $10, $20, $30) {
+          return _c(
+            "v-uni-swiper-item",
+            { key: item, attrs: { _i: "2-" + $30 } },
+            [
+              _c("v-uni-video", {
+                ref: _vm._$g("3-" + $30, "ref"),
+                refInFor: true,
+                staticClass: _vm._$g("3-" + $30, "sc"),
+                attrs: {
+                  id: _vm._$g("3-" + $30, "a-id"),
+                  src: _vm._$g("3-" + $30, "a-src"),
+                  controls: false,
+                  loop: true,
+                  "show-center-play-btn": false,
+                  _i: "3-" + $30
+                }
+              }),
+              _c(
+                "v-uni-cover-view",
+                {
+                  staticClass: _vm._$g("4-" + $30, "sc"),
+                  attrs: { _i: "4-" + $30 }
+                },
+                [
+                  _c("v-uni-cover-image", {
+                    staticClass: _vm._$g("5-" + $30, "sc"),
+                    attrs: {
+                      src: _vm._$g("5-" + $30, "a-src"),
+                      mode: "widthFix",
+                      _i: "5-" + $30
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.$handleViewEvent($event)
+                      }
+                    }
+                  }),
+                  _c("v-uni-cover-image", {
+                    staticClass: _vm._$g("6-" + $30, "sc"),
+                    attrs: {
+                      src: _vm._$g("6-" + $30, "a-src"),
+                      mode: "widthFix",
+                      _i: "6-" + $30
+                    }
+                  }),
+                  _c(
+                    "v-uni-cover-view",
+                    {
+                      staticClass: _vm._$g("7-" + $30, "sc"),
+                      attrs: { _i: "7-" + $30 }
+                    },
+                    [_vm._v("21312")]
+                  )
+                ],
+                1
+              ),
+              _c(
+                "v-uni-cover-view",
+                {
+                  staticClass: _vm._$g("8-" + $30, "sc"),
+                  attrs: { _i: "8-" + $30 }
+                },
+                [
+                  _c(
+                    "v-uni-cover-view",
+                    {
+                      staticClass: _vm._$g("9-" + $30, "sc"),
+                      attrs: { _i: "9-" + $30 }
+                    },
+                    [_vm._v("@古风小姐姐")]
+                  ),
+                  _c(
+                    "v-uni-cover-view",
+                    {
+                      staticClass: _vm._$g("10-" + $30, "sc"),
+                      attrs: { _i: "10-" + $30 }
+                    },
+                    [_vm._v("等哈瞌睡的就啊上课接电话撒到家啊快乐")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
-      _c(
-        "v-uni-cover-view",
-        { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
-        [
-          _c(
-            "v-uni-cover-view",
-            { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-            [_vm._v("@古风小姐姐")]
-          ),
-          _c(
-            "v-uni-cover-view",
-            { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
-            [_vm._v("等哈瞌睡的就啊上课接电话撒到家啊快乐")]
-          )
-        ],
+        }),
         1
       )
     ],
