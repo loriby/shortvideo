@@ -7,11 +7,11 @@
 				 <cover-view class="video_info">
 					 <cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
 					 <cover-image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></cover-image>
-					 <cover-view class="info_count">21312</cover-view>
+					 <text class="info_count">21312</text>
 				 </cover-view>
 				 <cover-view class="video-msg">
-					 <cover-view class="msg_header">@古风小姐姐</cover-view>
-					 <cover-view class="msg_cont">等哈瞌睡的就啊上课接电话撒到家啊快乐</cover-view>
+					 <text class="msg_header">@古风小姐姐</text>
+					 <text class="msg_cont">等哈瞌睡的就啊上课接电话撒到家啊快乐</text>
 				 </cover-view>
 				<!-- <view class="ad-view">
 					<ad adpid="1111111111" @load="onload" type="video" @close="onclose" @error="onerror" @downloadchange="ondownloadchange"></ad>
@@ -233,7 +233,6 @@
 	page {
 		width: 100%;
 		min-height: 100%;
-		display: flex;
 	}
 
 	/* #endif */
@@ -242,17 +241,12 @@
 		flex: 1;
 		width: 750rpx;
 		flex-direction: column;
-		display: flex;
 		align-items: stretch;
-		align-content: flex-start;
 		position: relative;
-		border: 0 solid #000;
-		box-sizing: border-box;
 	}
 
 	.swiper {
 		flex: 1;
-		background-color: #1f1f26;
 	}
 
 	.swiper-item {
@@ -262,11 +256,10 @@
 
 	.video {
 		flex: 1;
-		width: 100%;
-		position: relative;
-		border: 0 solid #000;
-		box-sizing: border-box;
+		width: 750rpx;
 		height: 100%;
+	}
+	.uni-video-container{
 	}
 	
 	.video_info{
@@ -279,26 +272,27 @@
 	.info_tx{
 		width: 80upx;
 		height: 80upx;
-		border: 2upx solid #fff;
+		border-width: 2px;
+		border-style: solid;
+		border-color: #fff;
 		border-radius: 40upx;
-		display: block;
 	}
 	.info_like{
 		width: 60upx;
-		height: auto;
-		margin: 0 auto;
-		display: block;
-		margin-top: 62upx;
+		height: 60upx;
+		margin-top: 40upx;
+		margin-bottom: 0;
+		margin-left: 10upx;
 	}
 	.info_count{
-		font-size: 32upx;
+		font-size: 26upx;
 		color: #fff;
 		text-align: center;
+		margin-top:5upx;
 	}
 	.video-msg{
-		margin: 0 30upx;
 		position: absolute;
-		left: 0;
+		left: 10upx;
 		bottom: 30upx;
 	}
 	.msg_header{
@@ -309,6 +303,5 @@
 		font-size: 28upx;
 		color: #fff;
 		margin-top: 16upx;
-		min-height: 60upx;
 	}
 </style>
