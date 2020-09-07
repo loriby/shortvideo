@@ -8,7 +8,6 @@
 		<view class="login-input-group">
 			<m-input class="login-ipt" type="text" clearable focus v-model="account" placeholder="请输入手机号/邮箱"></m-input>
 			<m-input class="login-ipt" type="password" displayable v-model="password" placeholder="请输入登录密码"></m-input>
-			<m-input class="login-ipt" type="text" displayable v-model="money" placeholder="请输入以太钱包地址"></m-input>
 			<m-input class="login-ipt" type="text" displayable v-model="recommendCode" placeholder="请输入推荐码"></m-input>
 			<!-- <view class="">
 				<m-input class="login-ipt" type="text" v-model="email" placeholder="请输入验证码"></m-input>
@@ -56,24 +55,39 @@
 					});
 					return;
 				}
-				if (this.money == '') {
+				if (this.recommendCode.length == '') {
 					uni.showToast({
 						icon: 'none',
-						title: '请输入以太钱包地址'
+						title: '请输入推荐码'
 					});
 					return;
 				}
-				const data = {
-					phone: this.account,
-					passwd: this.password,
-					ethaddr: this.money,
-					recommended_code: this.recommendCode
+				// if (this.money == '') {
+				// 	uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入以太钱包地址'
+				// 	});
+				// 	return;
+				// }
+				const params = {
+					data: {
+						phone: this.account,
+						passwd: this.password,
+						// ethaddr: this.money,
+						recommended_code: this.recommendCode
+					},
+					islogin: true,
+					callback (res) {
+						console.log(res)
+					}
 				}
 				console.log(this.account.indexOf('@'))
-				if (!this.account.indexOf('@')) {
-					this.registFun('http://8.210.169.146:8010/user/phone_regist', data)
+				if (this.account.indexOf('@') >= 0) {
+					params.url = '/user/email_regist'
+					this.$http.sendRequest(params)
 				} else {
-					this.registFun('http://8.210.169.146:8010/user/email_regist', data)
+					params.url = '/user/phone_regist'
+					this.$http.sendRequest(params)
 				}
 				// service.addUser(data);
 				// uni.showToast({
