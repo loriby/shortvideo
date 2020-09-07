@@ -1,5 +1,5 @@
 <template>
-	<view class="reg-content">
+	<view class="content">
 		<view class="login-tab">
 			<view class="tab-login" @click="goLogin">登录</view>
 			<view class="tab-resgister">注册</view>
@@ -82,6 +82,10 @@
 
 <style scoped>
 page {
+		background: #1F1F26;
+	}
+	
+	.content{
 		background: #1F1F26;
 	}
 

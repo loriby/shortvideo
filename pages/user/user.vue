@@ -33,6 +33,10 @@
 		</view>
 		<view class="con-list">
 			<view class="flex-item flex-item-V uni-bg-black">
+				<text class="uni-panel-text qianbao-icon">我到钱包</text>
+				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
+			</view>
+			<view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text xieyi-icon">用户协议</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
@@ -41,7 +45,7 @@
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
-				<text class="uni-panel-text tuichu-icon">退出登录</text>
+				<text class="uni-panel-text tuichu-icon" @click="bindLogin">退出登录</text>
 			</view>
 		</view>
 	</view>
@@ -194,6 +198,12 @@
 	}
 	.zhengce-icon{
 		background: url(../../static/img/zhengce.png) no-repeat left center;
+		padding-left: 18%;
+		background-size: 60upx 60upx;
+		background-position: 6% 0;
+	}
+	.qianbao-icon{
+		background: url(../../static/img/qianbao2.png) no-repeat left center;
 		padding-left: 18%;
 		background-size: 60upx 60upx;
 		background-position: 6% 0;

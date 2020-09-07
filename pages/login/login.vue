@@ -1,5 +1,5 @@
 <template>
-	<view class="login-content">
+	<view class="content">
 		<view class="login-tab">
 			<view class="tab-login">登录</view>
 			<view class="tab-resgister" @click="goRegister">注册</view>
@@ -73,44 +73,21 @@
 				this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
 			},
 			bindLogin() {
-				/**
-				 * 客户端对账号信息进行一些必要的校验。
-				 * 实际开发中，根据业务需要进行处理，这里仅做示例。
-				 */
-				if (this.account.length < 5) {
-					uni.showToast({
-						icon: 'none',
-						title: '账号最短为 5 个字符'
-					});
-					return;
+				const params = {
+					url: '/phone_login',
+					data: {
+						phone: this.account,
+						passwd: this.password
+					},
+					islogin: true,
+					callback (res) {
+						console.log(res)
+					}
 				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码最短为 6 个字符'
-					});
-					return;
-				}
-				/**
-				 * 下面简单模拟下服务端的处理
-				 * 检测用户账号密码是否在已注册的用户列表中
-				 * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
-				 */
-				const data = {
-					account: this.account,
-					password: this.password
-				};
-				const validUser = service.getUsers().some(function(user) {
-					return data.account === user.account && data.password === user.password;
-				});
-				if (validUser) {
-					this.toMain(this.account);
-				} else {
-					uni.showToast({
-						icon: 'none',
-						title: '用户账号或密码不正确',
-					});
-				}
+				this.$http.sendRequest(params)
+				// uni.reLaunch({
+				// 	url:'../main/main'
+				// })
 			},
 			oauth(value) {
 				uni.login({
@@ -184,6 +161,10 @@
 
 <style scoped>
 	page {
+		background: #1F1F26;
+	}
+	
+	.content{
 		background: #1F1F26;
 	}
 
