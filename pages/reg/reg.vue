@@ -15,7 +15,7 @@
 				<text class="get-code">获取验证码</text>
 			</view> -->
 		</view>
-		<button type="primary" class="login-btn" @tap="bindLogin">注册</button>
+		<button type="primary" class="login-btn" @tap="register">注册</button>
 	</view>
 </template>
 
@@ -56,28 +56,46 @@
 					});
 					return;
 				}
-				if (this.email.length < 3 || !~this.email.indexOf('@')) {
+				if (this.money == '') {
 					uni.showToast({
 						icon: 'none',
-						title: '邮箱地址不合法'
+						title: '请输入以太钱包地址'
 					});
 					return;
 				}
-
 				const data = {
-					account: this.account,
-					password: this.password,
-					email: this.email
+					phone: this.account,
+					passwd: this.password,
+					ethaddr: this.money,
+					recommended_code: this.recommendCode
 				}
-				service.addUser(data);
-				uni.showToast({
-					title: '注册成功'
-				});
-				uni.navigateBack({
-					delta: 1
+				console.log(this.account.indexOf('@'))
+				if (!this.account.indexOf('@')) {
+					this.registFun('http://8.210.169.146:8010/user/phone_regist', data)
+				} else {
+					this.registFun('http://8.210.169.146:8010/user/email_regist', data)
+				}
+				// service.addUser(data);
+				// uni.showToast({
+				// 	title: '注册成功'
+				// });
+				// uni.navigateBack({
+				// 	delta: 1
+				// });
+			},
+			registFun(url, obj) {
+				uni.request({
+				    url: url, //仅为示例，并非真实接口地址。
+				    data: obj,
+				    // header: {
+				    //     'custom-header': 'hello' //自定义请求头信息
+				    // },
+				    success: (res) => {
+				        console.log(res.data);
+				        // this.text = 'request success';
+				    }
 				});
 			},
-			
 			goLogin () {
 				uni.navigateTo({
 					url:'../login/login'
