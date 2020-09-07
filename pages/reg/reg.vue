@@ -8,7 +8,12 @@
 		<view class="login-input-group">
 			<m-input class="login-ipt" type="text" clearable focus v-model="account" placeholder="请输入手机号/邮箱"></m-input>
 			<m-input class="login-ipt" type="password" displayable v-model="password" placeholder="请输入登录密码"></m-input>
-			<m-input class="login-ipt" type="text" v-model="email" placeholder="请输入验证码"></m-input>
+			<m-input class="login-ipt" type="text" displayable v-model="money" placeholder="请输入以太钱包地址"></m-input>
+			<m-input class="login-ipt" type="text" displayable v-model="recommendCode" placeholder="请输入推荐码"></m-input>
+			<!-- <view class="">
+				<m-input class="login-ipt" type="text" v-model="email" placeholder="请输入验证码"></m-input>
+				<text class="get-code">获取验证码</text>
+			</view> -->
 		</view>
 		<button type="primary" class="login-btn" @tap="bindLogin">注册</button>
 	</view>
@@ -26,6 +31,8 @@
 			return {
 				account: '',
 				password: '',
+				money: '',
+				recommendCode: '',
 				email: ''
 			}
 		},
@@ -127,8 +134,13 @@ page {
 		width: 70%;
 		margin: 140upx 15% 0;
 		border-radius: 40upx;
-		height: 80upx;
+		height: 80upx;	
 		background: #DFB67D;
 		line-height: 80upx;
+	}
+	.get-code{
+		padding: 8upx 20upx;
+		background: #DFB67D;
+		color: #fff
 	}
 </style>
