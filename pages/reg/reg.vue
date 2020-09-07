@@ -55,6 +55,13 @@
 					});
 					return;
 				}
+				if (this.recommendCode.length == '') {
+					uni.showToast({
+						icon: 'none',
+						title: '请输入推荐码'
+					});
+					return;
+				}
 				// if (this.money == '') {
 				// 	uni.showToast({
 				// 		icon: 'none',
@@ -66,7 +73,7 @@
 					data: {
 						phone: this.account,
 						passwd: this.password,
-						ethaddr: this.money,
+						// ethaddr: this.money,
 						recommended_code: this.recommendCode
 					},
 					islogin: true,
@@ -76,10 +83,10 @@
 				}
 				console.log(this.account.indexOf('@'))
 				if (this.account.indexOf('@') >= 0) {
-					params.url = '/email_regist'
+					params.url = '/user/email_regist'
 					this.$http.sendRequest(params)
 				} else {
-					params.url = '/phone_regist'
+					params.url = '/user/phone_regist'
 					this.$http.sendRequest(params)
 				}
 				// service.addUser(data);
