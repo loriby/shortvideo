@@ -73,6 +73,7 @@
 			},
 			bindLogin() {
 				let url = '/user/phone_login';
+				const that = this
 				
 				if (this.account.indexOf('@') >= 0) {
 					url = '/user/email_login'
@@ -86,14 +87,17 @@
 					},
 					islogin: true,
 					callback (res) {
-						if (res.status_code === 200) {
+						// if (res.status_code === 200) {
+						if (res.result === '登录成功') {
 							uni.setStorageSync('token', res.token)
+							uni.setStorageSync('name', that.account)
 							uni.reLaunch({
 								url:'../main/main'
 							})
 						} else {
 							uni.showToast({
-								title: res.result
+								title: res.result,
+								icon:'none'
 							})
 						}
 					}

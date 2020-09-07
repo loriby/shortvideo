@@ -51,19 +51,20 @@ function sendRequest(params) {
 		timeout: 30000,
 		header: header,
 		success(res) {
-			if (res.data && (res.data.code === 41000 || res.data.code === 401)) {
-				uni.removeStorageSync('info')
+			console.log(res.data.result)
+			if (res.data && res.data.result === "failed") {
+				uni.removeStorageSync('name')
 				uni.removeStorageSync('token')
 				uni.showToast({
 					icon: 'none',
-					title:res.data.msg
+					title:res.data.response
 				})
+				
 				setTimeout(function() {
 					uni.redirectTo({
-						url:'/pages/login/index'
+						url:'/pages/login/login'
 					})
 				}, 2000)
-				this.$store.commit('settabIndex',index)
 			} else {
 				callback && callback(res.data || {})
 			}

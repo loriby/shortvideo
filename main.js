@@ -3,7 +3,7 @@ import App from './App'
 
 import store from './store'
 import http from './utils/index.js'
-import storage from './utils/index.js'
+import storage from './utils/storage.js'
 
 Vue.config.productionTip = false
 
