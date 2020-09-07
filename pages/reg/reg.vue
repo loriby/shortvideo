@@ -63,17 +63,25 @@
 					});
 					return;
 				}
-				const data = {
-					phone: this.account,
-					passwd: this.password,
-					ethaddr: this.money,
-					recommended_code: this.recommendCode
+				const params = {
+					data: {
+						phone: this.account,
+						passwd: this.password,
+						ethaddr: this.money,
+						recommended_code: this.recommendCode
+					},
+					islogin: true,
+					callback (res) {
+						console.log(res)
+					}
 				}
 				console.log(this.account.indexOf('@'))
-				if (!this.account.indexOf('@')) {
-					this.registFun('http://8.210.169.146:8010/user/phone_regist', data)
+				if (this.account.indexOf('@') >= 0) {
+					params.url = '/email_regist'
+					this.$http.sendRequest(params)
 				} else {
-					this.registFun('http://8.210.169.146:8010/user/email_regist', data)
+					params.url = '/phone_regist'
+					this.$http.sendRequest(params)
 				}
 				// service.addUser(data);
 				// uni.showToast({
