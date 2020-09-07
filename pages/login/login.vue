@@ -19,7 +19,6 @@
 </template>
 
 <script>
-	import service from '../../service.js';
 	import {
 		mapState,
 		mapMutations
@@ -73,8 +72,14 @@
 				this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
 			},
 			bindLogin() {
+				let url = '/user/phone_login';
+				
+				if (this.account.indexOf('@') >= 0) {
+					url = '/email_login'
+				}
+				
 				const params = {
-					url: '/phone_login',
+					url: url,
 					data: {
 						phone: this.account,
 						passwd: this.password
