@@ -84,5 +84,23 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "等会er短视频",
+        "router" : {
+            "mode" : "hash",
+            "base" : "/user"
+        },
+        "devServer" : {
+            "port" : 8010,
+			"disableHostCheck" : true,
+			"proxy" : {
+				"/care-web" : {
+					"target" : "http://8.210.169.146", //目标接口域名
+					"changeOrigin" : true,  //是否跨域
+					"secure" : false  // 设置支持https协议的代理
+				}
+			}
+        }
     }
 }
