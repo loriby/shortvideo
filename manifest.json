@@ -96,7 +96,7 @@
 			"disableHostCheck": true,
 			"proxy": {
 				"/user": {
-					"target": "http://8.210.169.146", //目标接口域名
+					"target": "http://8.210.169.146:8010", //目标接口域名
 					"changeOrigin": true, //是否跨域
 					"secure": false, // 设置支持https协议的代理
 					"pathRewrite": { //使用代理； 告诉他你这个连接要用代理
