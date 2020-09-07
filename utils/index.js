@@ -1,4 +1,5 @@
-const baseUrl = 'http://8.210.169.146:8010'
+// const baseUrl = 'http://8.210.169.146:8010'
+const baseUrl = '/user';
 
 function sendRequest(params) {
 	const url = baseUrl + params.url || ''
