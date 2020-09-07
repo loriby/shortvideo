@@ -75,7 +75,7 @@
 				let url = '/user/phone_login';
 				
 				if (this.account.indexOf('@') >= 0) {
-					url = '/email_login'
+					url = '/user/email_login'
 				}
 				
 				const params = {
@@ -86,13 +86,20 @@
 					},
 					islogin: true,
 					callback (res) {
-						console.log(res)
+						if (res.status_code === 200) {
+							uni.setStorageSync('token', res.token)
+							uni.reLaunch({
+								url:'../main/main'
+							})
+						} else {
+							uni.showToast({
+								title: res.result
+							})
+						}
 					}
 				}
 				this.$http.sendRequest(params)
-				// uni.reLaunch({
-				// 	url:'../main/main'
-				// })
+				
 			},
 			oauth(value) {
 				uni.login({

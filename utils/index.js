@@ -37,7 +37,7 @@ function sendRequest(params) {
 			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 		};
 	
-	islogin ? '' : header.Authorization = 'Bearer' + token;
+	islogin ? '' : data.token = token;
 
 	isloading ? uni.showLoading({
 		title: '加载中',
