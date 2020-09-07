@@ -8,7 +8,6 @@
 		<view class="login-input-group">
 			<m-input class="login-ipt" type="text" clearable focus v-model="account" placeholder="请输入手机号/邮箱"></m-input>
 			<m-input class="login-ipt" type="password" displayable v-model="password" placeholder="请输入登录密码"></m-input>
-			<m-input class="login-ipt" type="text" displayable v-model="money" placeholder="请输入以太钱包地址"></m-input>
 			<m-input class="login-ipt" type="text" displayable v-model="recommendCode" placeholder="请输入推荐码"></m-input>
 			<!-- <view class="">
 				<m-input class="login-ipt" type="text" v-model="email" placeholder="请输入验证码"></m-input>
@@ -56,13 +55,13 @@
 					});
 					return;
 				}
-				if (this.money == '') {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入以太钱包地址'
-					});
-					return;
-				}
+				// if (this.money == '') {
+				// 	uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入以太钱包地址'
+				// 	});
+				// 	return;
+				// }
 				const params = {
 					data: {
 						phone: this.account,
