@@ -78,7 +78,20 @@
 					},
 					islogin: true,
 					callback (res) {
-						console.log(res)
+						if (res.status_code === 200) {
+							uni.showToast({
+								icon: 'success',
+								title: res.result
+							})
+							uni.reLaunch({
+								url:'../login/login'
+							})
+						} else {
+							uni.showToast({
+								icon: 'none',
+								title: res.result
+							})
+						}
 					}
 				}
 				console.log(this.account.indexOf('@'))
