@@ -19,7 +19,6 @@
 </template>
 
 <script>
-	import service from '../../service.js';
 	import {
 		mapState,
 		mapMutations
@@ -73,21 +72,38 @@
 				this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
 			},
 			bindLogin() {
+				let url = '/user/phone_login';
+				const that = this
+				
+				if (this.account.indexOf('@') >= 0) {
+					url = '/user/email_login'
+				}
+				
 				const params = {
-					url: '/phone_login',
+					url: url,
 					data: {
 						phone: this.account,
 						passwd: this.password
 					},
 					islogin: true,
 					callback (res) {
-						console.log(res)
+						// if (res.status_code === 200) {
+						if (res.result === '登录成功') {
+							uni.setStorageSync('token', res.token)
+							uni.setStorageSync('name', that.account)
+							uni.reLaunch({
+								url:'../main/main'
+							})
+						} else {
+							uni.showToast({
+								title: res.result,
+								icon:'none'
+							})
+						}
 					}
 				}
 				this.$http.sendRequest(params)
-				// uni.reLaunch({
-				// 	url:'../main/main'
-				// })
+				
 			},
 			oauth(value) {
 				uni.login({

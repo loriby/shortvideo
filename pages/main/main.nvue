@@ -1,9 +1,9 @@
 <template>
-	<view class="page">
+	<view class="main-container">
 		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
 			<swiper-item v-for="item in videoList" :key="item.id">
-				<video class="video" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
-				 :show-center-play-btn="false"></video>
+				<video class="video" object-fit="fill" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
+				 :show-center-play-btn="true" :autoplay="true"></video>
 				<cover-view class="video_info">
 					<cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
 					<cover-image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></cover-image>
@@ -69,6 +69,7 @@
 		},
 		onLoad(e) {
 			this.showAd()
+			this.getVideo()
 		},
 		onReady() {
 			this.init();
@@ -179,7 +180,7 @@
 				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)].src);
 				setTimeout(() => {
 					this._videoContextList[this._videoIndex].play();
-				}, 200);
+				}, 100);
 				console.log("v:" + this._videoIndex + " d:" + this._videoDataIndex + "; next v:" + this.getNextIndex(
 					isNext) + " next d:" + this.getNextDataIndex(isNext));
 			},
@@ -241,10 +242,26 @@
 				uni.navigateTo({
 					url: '../detail/detail'
 				})
+			},
+			
+			getVideo () {
+				const that = this
+				
+				const params = {
+					url: '/video/link',
+					data: {
+						name: that.$storage.getStorage('name')
+					},
+					method: 'get',
+					callback (res) {
+						console.log(res)
+					}
+				}
+				this.$http.sendRequest(params)
 			}
 		},
 		onShow() {
-			this._videoContextList[this._videoIndex].play();
+			// this._videoContextList[0].play();
 		},
 		onHide() {
 			this._videoContextList[this._videoIndex].pause();
@@ -262,7 +279,7 @@
 
 	/* #endif */
 
-	.page {
+	.main-container {
 		flex: 1;
 		width: 750rpx;
 		flex-direction: column;
@@ -285,7 +302,9 @@
 		height: 100%;
 	}
 
-	.uni-video-container {}
+	.uni-video-container {
+		/* height: auto; */
+	}
 
 	.video_info {
 		position: absolute;
@@ -328,6 +347,7 @@
 	.msg_header {
 		font-size: 36upx;
 		color: #fff;
+		display: block;
 	}
 
 	.msg_cont {

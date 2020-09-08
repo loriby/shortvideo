@@ -1,4 +1,5 @@
-const baseUrl = 'http://8.210.169.146:8010'
+// const baseUrl = 'http://8.210.169.146:8010'
+const baseUrl = '/user';
 
 function sendRequest(params) {
 	const url = baseUrl + params.url || ''
@@ -36,7 +37,7 @@ function sendRequest(params) {
 			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 		};
 	
-	islogin ? '' : header.Authorization = 'Bearer' + token;
+	islogin ? '' : data.token = token;
 
 	isloading ? uni.showLoading({
 		title: '加载中',
@@ -50,19 +51,20 @@ function sendRequest(params) {
 		timeout: 30000,
 		header: header,
 		success(res) {
-			if (res.data && (res.data.code === 41000 || res.data.code === 401)) {
-				uni.removeStorageSync('info')
+			console.log(res.data.result)
+			if (res.data && res.data.result === "failed") {
+				uni.removeStorageSync('name')
 				uni.removeStorageSync('token')
 				uni.showToast({
 					icon: 'none',
-					title:res.data.msg
+					title:res.data.response
 				})
+				
 				setTimeout(function() {
 					uni.redirectTo({
-						url:'/pages/login/index'
+						url:'/pages/login/login'
 					})
 				}, 2000)
-				this.$store.commit('settabIndex',index)
 			} else {
 				callback && callback(res.data || {})
 			}
