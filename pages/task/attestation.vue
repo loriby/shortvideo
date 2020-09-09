@@ -7,21 +7,24 @@
 				 <form @submit="formSubmit" @reset="formReset">
 				  <view class="uni-form-item item uni-row">
 					  <text class="title">真实姓名</text>
-					  <input class="uni-input" name="input" placeholder="请输入姓名" />
+					  <input v-model="dataForm.name" class="uni-input" name="input" placeholder="请输入姓名" />
 				  </view>
 				  <view class="uni-form-item item uni-row">
 					  <text class="title">身份证号</text>
-					  <input class="uni-input" name="input" placeholder="请输入身份证号" />
+					  <input v-model="dataForm.idCard" class="uni-input" name="input" placeholder="请输入身份证号" />
 				  </view>
 				  <view class="uni-flex uni-column">
-					  <view class="flex-item upbox">
-						  <text class="title">身份证正面</text>
+					  <view @click="upImage('idCardFront')" class="flex-item upbox">
+						  <image v-if="idCardFront" :src="idCardFront" mode=""></image>
+						  <text v-else class="title">身份证正面</text>
 					   </view>
-					  <view class="flex-item upbox">
-						  <text class="title">身份证反面</text>
+					  <view @click="upImage('idCardBack')" class="flex-item upbox">
+						  <image v-if="idCardBack" :src="idCardBack" mode=""></image>
+						  <text v-else  class="title">身份证反面</text>
 					  </view>
-					  <view class="flex-item upbox">
-						  <text class="title">手持身份证和手写账号ID</text>
+					  <view @click="upImage('allCard')" class="flex-item upbox">
+						  <image v-if="allCard" :src="allCard" mode=""></image>
+						  <text v-else class="title">手持身份证和手写账号ID</text>
 					  </view>
 				  </view>
 				  <view class="uni-btn-v">
@@ -37,7 +40,16 @@
 	export default {
 		data() {
 			return {
-				
+				idCardFront:'', // 身份证正面
+				idCardBack:'', // 身份证反面面
+				allCard:'', // 手持身份证和手写账号ID
+				dataForm:{
+				 idCardFrontFile:'',
+				 idCardBackFile:'',
+				 allCardFile:'',
+				 name:'',
+				 idCard:''
+				}
 			}
 		},
 		methods: {
@@ -67,6 +79,19 @@
 			},
 			formReset: function(e) {
 				console.log('清空数据')
+			},
+			// 上传图片
+			upImage(imgName,upImageName){
+				let _t = this
+				uni.chooseImage({
+					count:1,
+					success:function(rst){
+						_t.dataForm[imgName+'File'] = rst.tempFiles[0]
+						_t[imgName] = rst.tempFilePaths[0]
+						console.log(_t.dataForm)
+					}
+				})
+				
 			}
 		}
 	}
@@ -124,5 +149,10 @@
 
 .upbox:first-child{
 	margin-top: 40upx;
+}
+
+.upbox image{
+	width: 100%;
+	height: 100%;
 }
 </style>
