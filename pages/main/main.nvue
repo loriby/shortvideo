@@ -22,46 +22,13 @@
 </template>
 <script>
 	import AD from '../../utils/ad.js';
-	const videoData = [{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4'
-		},
-		{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-02.mp4'
-		},
-		{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-03.mp4'
-		},
-		{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-01.mp4'
-		},
-		{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-02.mp4'
-		},
-		{
-			src: 'https://img-cdn-qiniu.dcloud.net.cn/hello-nvue-swiper-vertical-03.mp4'
-		}
-	];
+	const videoData = [];
 
 	export default {
 		data() {
 			return {
 				circular: true,
-				videoList: [{
-						id: "video0",
-						src: "",
-						img: ""
-					},
-					{
-						id: "video1",
-						src: "",
-						img: ""
-					},
-					{
-						id: "video2",
-						src: "",
-						img: ""
-					}
-				],
+				videoList: [],
 				videoDataList: [],
 				adList: [],
 				adData: {}
@@ -254,7 +221,13 @@
 					},
 					method: 'get',
 					callback (res) {
-						console.log(res)
+						const link = res.response.link.link
+						
+						const obj = {
+							id: `video${that.videoList.length}`,
+							src: link
+						}
+						that.videoList.push(obj)
 					}
 				}
 				this.$http.sendRequest(params)

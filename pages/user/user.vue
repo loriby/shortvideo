@@ -9,7 +9,7 @@
 				<image src="../../static/img/touxiang.png" mode=""></image>
 			</view>
 			<view class="nicheng-box">
-				<text class="nicheng-text">数据库拉屎</text>
+				<text class="nicheng-text">小明</text>
 				<text class="level-icon level-qingtong"></text>
 			</view>
 			<view class="head-txt">

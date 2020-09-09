@@ -88,8 +88,8 @@
 					islogin: true,
 					callback (res) {
 						// if (res.status_code === 200) {
-						if (res.result === '登录成功') {
-							uni.setStorageSync('token', res.token)
+						if (res.success === 'true') {
+							uni.setStorageSync('token', res.response.token)
 							uni.setStorageSync('name', that.account)
 							uni.reLaunch({
 								url:'../main/main'
