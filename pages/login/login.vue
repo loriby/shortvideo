@@ -73,6 +73,7 @@
 			},
 			bindLogin() {
 				let url = '/user/phone_login';
+				const that = this
 				
 				if (this.account.indexOf('@') >= 0) {
 					url = '/user/email_login'
@@ -89,6 +90,7 @@
 						console.log(res)
 						if (res.success === 'true') {
 							uni.setStorageSync('token', res.token)
+							uni.setStorageSync('name', that.account)
 							uni.reLaunch({
 								url:'../main/main'
 							})
