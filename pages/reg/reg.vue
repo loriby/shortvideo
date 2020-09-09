@@ -96,7 +96,7 @@
 						}
 					}
 				}
-				console.log(this.account.indexOf('@'))
+				
 				if (this.account.indexOf('@') >= 0) {
 					params.url = '/user/email_regist'
 					this.$http.sendRequest(params)

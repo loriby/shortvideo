@@ -87,7 +87,7 @@
 					},
 					islogin: true,
 					callback (res) {
-						console.log(res)
+						// if (res.status_code === 200) {
 						if (res.success === 'true') {
 							uni.setStorageSync('token', res.response.token)
 							uni.setStorageSync('name', that.account)
@@ -96,8 +96,8 @@
 							})
 						} else {
 							uni.showToast({
-								icon: 'none',
-								title: res.response
+								title: res.result,
+								icon:'none'
 							})
 						}
 					}

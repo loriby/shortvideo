@@ -51,7 +51,6 @@ function sendRequest(params) {
 		timeout: 30000,
 		header: header,
 		success(res) {
-			console.log(res.data.result)
 			if (res.data && res.data.result === "failed") {
 				uni.removeStorageSync('name')
 				uni.removeStorageSync('token')
