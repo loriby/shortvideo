@@ -71,7 +71,6 @@
 				 */
 				this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
 			},
-<<<<<<< HEAD
 			bindLogin() {
 				let url = '/user/phone_login';
 				const that = this
@@ -104,40 +103,6 @@
 					}
 				}
 				this.$http.sendRequest(params)
-=======
-			bindLogin() {
-				let url = '/user/phone_login';
-				const that = this
-				
-				if (this.account.indexOf('@') >= 0) {
-					url = '/user/email_login'
-				}
-				
-				const params = {
-					url: url,
-					data: {
-						phone: this.account,
-						passwd: this.password
-					},
-					islogin: true,
-					callback (res) {
-						console.log(res)
-						if (res.success === 'true') {
-							uni.setStorageSync('token', res.response.token)
-							uni.setStorageSync('name', that.account)
-							uni.reLaunch({
-								url:'../main/main'
-							})
-						} else {
-							uni.showToast({
-								icon: 'none',
-								title: res.response
-							})
-						}
-					}
-				}
-				this.$http.sendRequest(params)
->>>>>>> 485c71258120aba8d94dec87acbc41561cd9397f
 				
 			},
 			oauth(value) {
