@@ -45,7 +45,7 @@
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
-				<text class="uni-panel-text tuichu-icon" @click="bindLogin">退出登录</text>
+				<text class="uni-panel-text tuichu-icon" @click="logout">退出登录</text>
 			</view>
 		</view>
 	</view>
@@ -61,8 +61,53 @@
 		computed: {
 			...mapState(['hasLogin', 'forcedLogin'])
 		},
+		mounted() {
+			this.getMyhome();
+		},
 		methods: {
 			...mapMutations(['logout']),
+			getMyhome() {
+				const params = {
+					url: '/user/myhome',
+					data: {
+						name: 'admin',
+						token: localStorage.getItem('token')
+					},
+					method: 'get',
+					callback (res) {
+						console.log(res)
+						// if (res.status_code === 200) {
+						// 	uni.showToast({
+						// 		icon: 'success',
+						// 		title: res.result
+						// 	})
+						// 	uni.reLaunch({
+						// 		url:'../login/login'
+						// 	})
+						// } else {
+						// 	uni.showToast({
+						// 		icon: 'none',
+						// 		title: res.result
+						// 	})
+						// }
+					}
+				}
+				this.$http.sendRequest(params)
+			},
+			// 退出登录
+			logout() {
+				let that = this
+				const params = {
+					url: '/user/logout',
+					callback (res) {
+						localStorage.removeStorageSync('token')
+						localStorage.removeStorageSync('name')
+						that.bindLogin()
+						console.log(res)
+					}
+				}
+				this.$http.sendRequest(params)
+			},
 			bindLogin() {
 				uni.navigateTo({
 					url: '../login/login',
