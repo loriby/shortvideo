@@ -89,7 +89,7 @@
 					callback (res) {
 						console.log(res)
 						if (res.success === 'true') {
-							uni.setStorageSync('token', res.token)
+							uni.setStorageSync('token', res.response.token)
 							uni.setStorageSync('name', that.account)
 							uni.reLaunch({
 								url:'../main/main'
