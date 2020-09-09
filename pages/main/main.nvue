@@ -35,8 +35,15 @@
 			}
 		},
 		onLoad(e) {
-			this.showAd()
-			this.getVideo()
+			let token = uni.getStorageSync('token')
+			if (token == '') {
+				uni.reLaunch({
+					url: '../login/login',
+				});
+			} else {
+				this.showAd()
+				this.getVideo()
+			}
 		},
 		onReady() {
 			this.init();
