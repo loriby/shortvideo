@@ -78,7 +78,22 @@
 					},
 					islogin: true,
 					callback (res) {
-						console.log(res)
+						if (res.success === 'true') {
+							uni.showToast({
+								icon: 'success',
+								title: '注册成功'
+							})
+							setTimeout(function(){
+								uni.reLaunch({
+									url:'../login/login'
+								})
+							}, 200)
+						} else {
+							uni.showToast({
+								icon: 'none',
+								title: res.response
+							})
+						}
 					}
 				}
 				console.log(this.account.indexOf('@'))

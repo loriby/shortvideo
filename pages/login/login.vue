@@ -87,8 +87,8 @@
 					},
 					islogin: true,
 					callback (res) {
-						// if (res.status_code === 200) {
-						if (res.result === '登录成功') {
+						console.log(res)
+						if (res.success === 'true') {
 							uni.setStorageSync('token', res.token)
 							uni.setStorageSync('name', that.account)
 							uni.reLaunch({
@@ -96,8 +96,8 @@
 							})
 						} else {
 							uni.showToast({
-								title: res.result,
-								icon:'none'
+								icon: 'none',
+								title: res.response
 							})
 						}
 					}
