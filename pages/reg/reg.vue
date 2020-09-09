@@ -78,18 +78,20 @@
 					},
 					islogin: true,
 					callback (res) {
-						if (res.status_code === 200) {
+						if (res.success === 'true') {
 							uni.showToast({
 								icon: 'success',
-								title: res.result
+								title: '注册成功'
 							})
-							uni.reLaunch({
-								url:'../login/login'
-							})
+							setTimeout(function(){
+								uni.reLaunch({
+									url:'../login/login'
+								})
+							}, 200)
 						} else {
 							uni.showToast({
 								icon: 'none',
-								title: res.result
+								title: res.response
 							})
 						}
 					}

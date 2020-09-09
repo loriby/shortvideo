@@ -86,14 +86,16 @@
 					},
 					islogin: true,
 					callback (res) {
-						if (res.status_code === 200) {
+						console.log(res)
+						if (res.success === 'true') {
 							uni.setStorageSync('token', res.token)
 							uni.reLaunch({
 								url:'../main/main'
 							})
 						} else {
 							uni.showToast({
-								title: res.result
+								icon: 'none',
+								title: res.response
 							})
 						}
 					}
