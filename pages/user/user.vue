@@ -67,11 +67,12 @@
 		methods: {
 			...mapMutations(['logout']),
 			getMyhome() {
+				const that = this
 				const params = {
 					url: '/user/myhome',
 					data: {
 						name: 'admin',
-						token: localStorage.getItem('token')
+						token: that.$storage.getStorage('token')
 					},
 					method: 'get',
 					callback (res) {
@@ -96,18 +97,20 @@
 			},
 			// 退出登录
 			logout() {
-				let that = this
-				const params = {
-					url: '/user/logout',
-					callback (res) {
-						localStorage.removeStorageSync('token')
-						localStorage.removeStorageSync('name')
-						that.bindLogin()
-						console.log(res)
-					}
-				}
-				this.$http.sendRequest(params)
-			},
+			    let that = this
+				uni.clearStorage()
+			    that.bindLogin()
+			    // const params = {
+			    //  url: '/user/logout',
+			    //  callback (res) {
+			    //   localStorage.removeStorageSync('token')
+			    //   localStorage.removeStorageSync('name')
+			    //   that.bindLogin()
+			    //   console.log(res)
+			    //  }
+			    // }
+			    // this.$http.sendRequest(params)
+			   },
 			bindLogin() {
 				uni.navigateTo({
 					url: '../login/login',

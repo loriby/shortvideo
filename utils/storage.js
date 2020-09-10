@@ -1,10 +1,10 @@
 function getStorage (k) {
 	try{
 		const val = uni.getStorageSync(k)
-		return JSON.parse(val)
+		return val
 	}
 	catch (e) {
-		return {}
+		return false
 	}
 }
 
