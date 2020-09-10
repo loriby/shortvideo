@@ -40,9 +40,7 @@
 			}
 		},
 		onShow: function() {
-			// uni.navigateTo({
-			//     url: '/pages/task/attestation'
-			// });
+			
 		},
 	}
 </script>

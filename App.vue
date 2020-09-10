@@ -1,10 +1,18 @@
 <script>
 	export default {
+		created() {
+			
+		},
 		onLaunch: function() {
 			console.log('App Launch');
 		},
 		onShow: function() {
-			console.log('App Show');
+			console.log(this.$storage.getStorage('token'))
+			if (!this.$storage.getStorage('token')) {
+				uni.reLaunch({
+					url:'pages/login/login'
+				})
+			}
 		},
 		onHide: function() {
 			console.log('App Hide');

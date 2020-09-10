@@ -44,6 +44,10 @@
 				<text class="uni-panel-text zhengce-icon">隐私政策</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
+			<view @click="goUrl('/pages/task/attestation')" class="flex-item flex-item-V uni-bg-black">
+				<text class="uni-panel-text xieyi-icon">实名认证</text>
+				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
+			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text tuichu-icon" @click="logout">退出登录</text>
 			</view>
@@ -67,11 +71,12 @@
 		methods: {
 			...mapMutations(['logout']),
 			getMyhome() {
+				const that = this
 				const params = {
 					url: '/user/myhome',
 					data: {
 						name: 'admin',
-						token: localStorage.getItem('token')
+						token: that.$storage.getStorage('token')
 					},
 					method: 'get',
 					callback (res) {
@@ -96,18 +101,20 @@
 			},
 			// 退出登录
 			logout() {
-				let that = this
-				const params = {
-					url: '/user/logout',
-					callback (res) {
-						localStorage.removeStorageSync('token')
-						localStorage.removeStorageSync('name')
-						that.bindLogin()
-						console.log(res)
-					}
-				}
-				this.$http.sendRequest(params)
-			},
+			    let that = this
+				uni.clearStorage()
+			    that.bindLogin()
+			    // const params = {
+			    //  url: '/user/logout',
+			    //  callback (res) {
+			    //   localStorage.removeStorageSync('token')
+			    //   localStorage.removeStorageSync('name')
+			    //   that.bindLogin()
+			    //   console.log(res)
+			    //  }
+			    // }
+			    // this.$http.sendRequest(params)
+			   },
 			bindLogin() {
 				uni.navigateTo({
 					url: '../login/login',

@@ -3,7 +3,7 @@
 		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
 			<swiper-item v-for="item in videoList" :key="item.id">
 				<video class="video" object-fit="fill" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
-				 :show-center-play-btn="true" :autoplay="true"></video>
+				 :show-center-play-btn="false"></video>
 				<cover-view class="video_info">
 					<cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
 					<cover-image class="info_like" src="../../static/img/main/like.png" mode="widthFix"></cover-image>
@@ -22,28 +22,53 @@
 </template>
 <script>
 	import AD from '../../utils/ad.js';
-	const videoData = [];
+	const videoData = [
+				'http://8.210.169.146:8010/video/link?token=',
+				'http://8.210.169.146:8010/video/link?token=',
+				'http://8.210.169.146:8010/video/link?token=',
+				'http://8.210.169.146:8010/video/link?token=',
+				'http://8.210.169.146:8010/video/link?token=',
+				'http://8.210.169.146:8010/video/link?token='];
 
 	export default {
 		data() {
 			return {
 				circular: true,
-				videoList: [],
+				videoList: [
+					{
+					        id: "video0",
+					        src: "",
+					        img: ""
+					    },{
+                        id: "video1",
+                        src: "",
+                        img: ""
+                    },{
+                        id: "video2",
+                        src: "",
+                        img: ""
+                    },{
+                        id: "video3",
+                        src: "",
+                        img: ""
+                    },{
+                        id: "video4",
+                        src: "",
+                        img: ""
+                    },{
+                        id: "video5",
+                        src: "",
+                        img: ""
+                    }
+				],
 				videoDataList: [],
 				adList: [],
 				adData: {}
 			}
 		},
 		onLoad(e) {
-			let token = uni.getStorageSync('token')
-			if (token == '') {
-				uni.reLaunch({
-					url: '../login/login',
-				});
-			} else {
-				this.showAd()
-				this.getVideo()
-			}
+			this.showAd()
+			// this.getVideo()
 		},
 		onReady() {
 			this.init();
@@ -86,7 +111,9 @@
 				this._videoDataIndex = 0;
 			},
 			getData(e) {
-				this.videoDataList = videoData;
+				for (let k of videoData) {
+					this.videoDataList.push(k + this.$storage.getStorage('token'))
+				}
 				setTimeout(() => {
 					this.updateVideo(true);
 				}, 200)
@@ -150,11 +177,11 @@
 				return index;
 			},
 			updateVideo(isNext) {
-				this.$set(this.videoList[this._videoIndex], 'src', this.videoDataList[this._videoDataIndex].src);
-				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)].src);
+				this.$set(this.videoList[this._videoIndex], 'src', this.videoDataList[this._videoDataIndex]);
+				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)]);
 				setTimeout(() => {
 					this._videoContextList[this._videoIndex].play();
-				}, 100);
+				}, 600);
 				console.log("v:" + this._videoIndex + " d:" + this._videoDataIndex + "; next v:" + this.getNextIndex(
 					isNext) + " next d:" + this.getNextDataIndex(isNext));
 			},
@@ -217,19 +244,19 @@
 					url: '../detail/detail'
 				})
 			},
-			
-			getVideo () {
+
+			getVideo() {
 				const that = this
-				
+
 				const params = {
 					url: '/video/link',
 					data: {
 						name: that.$storage.getStorage('name')
 					},
 					method: 'get',
-					callback (res) {
+					callback(res) {
 						const link = res.response.link.link
-						
+
 						const obj = {
 							id: `video${that.videoList.length}`,
 							src: link
