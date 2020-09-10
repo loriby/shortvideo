@@ -44,6 +44,10 @@
 				<text class="uni-panel-text zhengce-icon">隐私政策</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
+			<view @click="goUrl('/pages/task/attestation')" class="flex-item flex-item-V uni-bg-black">
+				<text class="uni-panel-text xieyi-icon">实名认证</text>
+				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
+			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text tuichu-icon" @click="logout">退出登录</text>
 			</view>
