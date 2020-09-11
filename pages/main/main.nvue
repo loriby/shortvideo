@@ -92,7 +92,6 @@
 				this._videoIndex = 0;
 				this._videoContextList = [];
 				for (var i = 0; i < videoData.length; i++) {
-					console.log(this)
 					this._videoContextList.push(uni.createVideoContext('video' + i, this));
 				}
 				this._videoDataIndex = 0;
@@ -122,12 +121,11 @@
 				}
 
 				if (isNext) {
+					let videoIndex = `video${videoData.length}`;
 					videoData.push('http://8.210.169.146:8010/video/link')
-					this._videoContextList.push(uni.createVideoContext('video', this));
-					console.log(videoData)
+					this._videoContextList.push(uni.createVideoContext(videoIndex, this));
 					this.videoDataList.push('http://8.210.169.146:8010/video/link')
-					console.log(videoData.length-1)
-					let videoIndex = `video${videoData.length-1}` 
+
 					this.videoList.push(
 						{
 					        id: videoIndex,
@@ -135,10 +133,6 @@
 					        img: ""
 					    }
 					)
-					console.log(this.videoList)
-					setTimeout(() => {
-						this.updateVideo(true);
-					}, 200)
 					this._videoDataIndex++;
 				} else {
 					this._videoDataIndex--;
@@ -184,12 +178,10 @@
 			updateVideo(isNext) {
 				this.$set(this.videoList[this._videoIndex], 'src', this.videoDataList[this._videoDataIndex]);
 				this.$set(this.videoList[this.getNextIndex(isNext)], 'src', this.videoDataList[this.getNextDataIndex(isNext)]);
+
 				setTimeout(() => {
-					console.log(this._videoIndex)
 					this._videoContextList[this._videoIndex].play();
 				}, 600);
-				console.log("v:" + this._videoIndex + " d:" + this._videoDataIndex + "; next v:" + this.getNextIndex(
-					isNext) + " next d:" + this.getNextDataIndex(isNext));
 			},
 
 

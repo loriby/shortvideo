@@ -68,6 +68,20 @@
             	"navigationBarBackgroundColor": "#1F1F26"
             }
         }
+        ,{
+            "path" : "pages/money/money",
+            "style" : {
+            	"navigationBarTitleText": "钱包",
+            	"navigationBarBackgroundColor": "#1F1F26"
+            }
+        }
+        ,{
+            "path" : "pages/share/share",
+            "style" : {
+            	"navigationBarTitleText": "分享推荐",
+            	"navigationBarBackgroundColor": "#1F1F26"
+            }
+        }
     ],
 	"tabBar": {
 		"color": "#686c6f",

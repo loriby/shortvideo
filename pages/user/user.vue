@@ -26,7 +26,7 @@
 				<image src="/static/img/renshu.png" mode=""></image>
 				<text>团队人数</text>
 			</view>
-			<view class="flex-item uni-bg-black">
+			<view class="flex-item uni-bg-black" @click="goUrl('/pages/money/money')">
 				<image src="/static/img/qianbao.png" mode=""></image>
 				<text>钱包</text>
 			</view>
@@ -36,6 +36,10 @@
 				<text class="uni-panel-text qianbao-icon">我到钱包</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view> -->
+			<view class="flex-item flex-item-V uni-bg-black" @click="goUrl('/pages/share/share')">
+				<text class="uni-panel-text xieyi-icon">分享推荐</text>
+				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
+			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text xieyi-icon">用户协议</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
@@ -46,6 +50,10 @@
 			</view>
 			<view @click="goUrl('/pages/task/attestation')" class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text xieyi-icon">实名认证</text>
+				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
+			</view>
+			<view class="flex-item flex-item-V uni-bg-black" @click="goUrl('/pages/pwd/pwd')">
+				<text class="uni-panel-text zhengce-icon">重置密码</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
 			</view>
 			<view class="flex-item flex-item-V uni-bg-black">
@@ -66,7 +74,7 @@
 			...mapState(['hasLogin', 'forcedLogin'])
 		},
 		mounted() {
-			this.getMyhome();
+			// this.getMyhome();
 		},
 		methods: {
 			...mapMutations(['logout']),
