@@ -96,7 +96,7 @@
 							})
 						} else {
 							uni.showToast({
-								title: res.result,
+								title: res.response,
 								icon:'none'
 							})
 						}

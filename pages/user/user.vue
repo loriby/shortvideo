@@ -28,14 +28,14 @@
 			</view>
 			<view class="flex-item uni-bg-black">
 				<image src="/static/img/qianbao.png" mode=""></image>
-				<text>钱包余额</text>
+				<text>钱包</text>
 			</view>
 		</view>
 		<view class="con-list">
-			<view class="flex-item flex-item-V uni-bg-black">
+			<!-- <view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text qianbao-icon">我到钱包</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
-			</view>
+			</view> -->
 			<view class="flex-item flex-item-V uni-bg-black">
 				<text class="uni-panel-text xieyi-icon">用户协议</text>
 				<text class="uni-panel-icon uni-icon uni-panel-icon-on">&#xe470;</text>
