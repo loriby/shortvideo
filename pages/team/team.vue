@@ -21,11 +21,28 @@
 	export default {
 		data() {
 			return {
-				
+				level: []
 			}
 		},
+		created() {
+			this.getData()
+		},
 		methods: {
-			
+			getData () {
+				const that = this
+				const params = {
+					url: '/user/relationship',
+					method: 'get',
+					data: {
+						name: that.$storage.getStorage('name')
+					},
+					callback (res) {
+						console.log(res)
+					}
+				}
+				
+				this.$http.sendRequest(params)
+			}
 		}
 	}
 </script>

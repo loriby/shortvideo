@@ -24,7 +24,8 @@
 		}, {
 			"path": "pages/pwd/pwd",
 			"style": {
-				"navigationBarTitleText": "找回密码"
+				"navigationBarTitleText": "修改密码",
+				"navigationBarBackgroundColor": "#1F1F26"
 			}
 		}, {
 			"path": "pages/user/user",
