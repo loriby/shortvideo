@@ -2,7 +2,7 @@
 	<view class="main-container">
 		<swiper class="swiper" :circular="circular" :vertical="true" @change="onSwiperChange">
 			<swiper-item v-for="(item, index) in videoList" :key="item.id">
-				<video class="video" object-fit="fill" :id="item.id" :ref="item.id" :src="item.src+'?id='+index" :controls="false" :loop="true"
+				<video class="video" object-fit="fill" :id="item.id" :ref="item.id" :src="item.src" :controls="false" :loop="true"
 				 :show-center-play-btn="false"></video>
 				<cover-view class="video_info">
 					<cover-image class="info_tx" @click="goDetail" src="../../static/img/main/touxiang.png" mode="widthFix"></cover-image>
@@ -23,9 +23,9 @@
 <script>
 	import AD from '../../utils/ad.js';
 	const videoData = [
-				'http://8.210.169.146:8010/video/link',
-				'http://8.210.169.146:8010/video/link',
-				'http://8.210.169.146:8010/video/link'];
+				'https://www.runoob.com/try/demo_source/movie.mp4',
+				'https://www.runoob.com/try/demo_source/movie.mp4',
+				'https://www.runoob.com/try/demo_source/movie.mp4'];
 
 	export default {
 		data() {
@@ -122,9 +122,9 @@
 
 				if (isNext) {
 					let videoIndex = `video${videoData.length}`;
-					videoData.push('http://8.210.169.146:8010/video/link')
+					videoData.push('https://www.runoob.com/try/demo_source/movie.mp4')
 					this._videoContextList.push(uni.createVideoContext(videoIndex, this));
-					this.videoDataList.push('http://8.210.169.146:8010/video/link')
+					this.videoDataList.push('https://www.runoob.com/try/demo_source/movie.mp4')
 
 					this.videoList.push(
 						{

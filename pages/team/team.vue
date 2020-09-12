@@ -2,10 +2,10 @@
 	<view class="team-content">
 		<view class="team-head">
 			<view class="head-cont">
-				<view class="team-count team-zhitui">313213</view>
+				<view class="team-count team-zhitui">{{direct_count}}</view>
 			</view>
 			<view class="head-cont">
-				<view class="team-count team-shanxia">31222</view>
+				<view class="team-count team-shanxia">{{indirect_count}}</view>
 			</view>
 		</view>
 		<view class="team-lists">
@@ -21,11 +21,18 @@
 	export default {
 		data() {
 			return {
-				level: []
+				level: [],
+				direct_count: 0,
+				indirect_count: 0
 			}
 		},
 		created() {
 			this.getData()
+		},
+		onLoad(e) {
+			console.log(e)
+			this.direct_count = e.directcount
+			this.indirect_count = e.indirect
 		},
 		methods: {
 			getData () {

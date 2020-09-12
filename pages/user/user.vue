@@ -70,59 +70,57 @@
 	} from 'vuex'
 
 	export default {
+		data() {
+			return {
+				obj: {
+					direct_count: 0,
+					indirect_count: 0,
+					coin_balance: 0,
+					score_balance: 0
+				}
+			}
+		},
 		computed: {
 			...mapState(['hasLogin', 'forcedLogin'])
 		},
 		mounted() {
-			// this.getMyhome();
+			this.getMyhome();
 		},
 		methods: {
-			...mapMutations(['logout']),
 			getMyhome() {
 				const that = this
 				const params = {
 					url: '/user/myhome',
 					data: {
-						name: 'admin',
-						token: that.$storage.getStorage('token')
+						name: that.$storage.getStorage('name')
 					},
 					method: 'get',
-					callback (res) {
-						console.log(res)
-						// if (res.status_code === 200) {
-						// 	uni.showToast({
-						// 		icon: 'success',
-						// 		title: res.result
-						// 	})
-						// 	uni.reLaunch({
-						// 		url:'../login/login'
-						// 	})
-						// } else {
-						// 	uni.showToast({
-						// 		icon: 'none',
-						// 		title: res.result
-						// 	})
-						// }
+					callback(res) {
+						if (res.success === 'true') {
+							that.obj = res.response
+						} else {
+							uni.showToast({
+								title: res.success,
+								icon: 'none'
+							})
+						}
 					}
 				}
 				this.$http.sendRequest(params)
+				// uni.request({
+				// 	url:"http://8.210.169.146:8010/user/myhome",
+				// 	method:"get",
+				// 	success(res) {
+				// 		console.log(res)
+				// 	}
+				// })
 			},
 			// 退出登录
 			logout() {
-			    let that = this
+				let that = this
 				uni.clearStorage()
-			    that.bindLogin()
-			    // const params = {
-			    //  url: '/user/logout',
-			    //  callback (res) {
-			    //   localStorage.removeStorageSync('token')
-			    //   localStorage.removeStorageSync('name')
-			    //   that.bindLogin()
-			    //   console.log(res)
-			    //  }
-			    // }
-			    // this.$http.sendRequest(params)
-			   },
+				that.bindLogin()
+			},
 			bindLogin() {
 				uni.navigateTo({
 					url: '../login/login',
@@ -139,10 +137,16 @@
 					});
 				}
 			},
-			
-			goUrl (url) {
+
+			goUrl(url) {
+				console.log(this.obj)
+				if (url.indexOf('team') >= 0) {
+					url = url + '?directcount=' + this.obj.direct_count + '&indirect=' + this.obj.indirect_count
+				} else if (url.indexOf('money') >= 0) {
+					url = url + '?coin_balance=' + this.obj.coin_balance + '&score_balance=' + this.obj.score_balance
+				}
 				uni.navigateTo({
-					url:url
+					url: url
 				})
 			}
 		}
@@ -150,27 +154,31 @@
 </script>
 
 <style>
-	.my-content{
+	.my-content {
 		width: 100%;
 		background: url(../../static/img/my_bg.png) no-repeat top;
 		background-size: 100%;
 		background-color: #16161B;
 		padding-bottom: 100upx;
 	}
-	.head-box{
+
+	.head-box {
 		width: 85%;
 		margin: 100upx auto 0;
 	}
-	.portrait{
-		width:120upx;
+
+	.portrait {
+		width: 120upx;
 		height: 120upx;
 	}
+
 	.portrait image {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 	}
-	.nicheng-box{
+
+	.nicheng-box {
 		width: 100%;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -178,46 +186,54 @@
 		line-height: 60upx;
 		padding: 24upx 0;
 	}
-	.nicheng-text{
+
+	.nicheng-text {
 		webkit-box-flex: 1;
 		-webkit-flex: 1;
 		-ms-flex: 1;
 		flex: 1;
 		font-size: 38upx;
-		color:#fff
+		color: #fff
 	}
-	.level-icon{
+
+	.level-icon {
 		width: 48upx;
 		height: 50upx;
 	}
-	.level-qingtong{
+
+	.level-qingtong {
 		background: url(../../static/img/myTeam/qingtong.png) no-repeat;
 		background-size: 100%;
 	}
-	.head-txt text{
+
+	.head-txt text {
 		color: #727582;
 		font-size: 26upx;
 		display: block;
 	}
-	.con-list{
+
+	.con-list {
 		border-radius: 12upx;
 		background: #272734;
 		padding: 24upx 0;
 		width: 94%;
 		margin: 24upx auto 0;
 	}
+
 	.header-list-box {
 		padding: 75upx 0;
 	}
-	.header-list-box text{
+
+	.header-list-box text {
 		color: #fff;
 		font-size: 30upx;
 	}
+
 	.flex-item {
 		width: 33.3%;
 		text-align: center;
 	}
-	
+
 	.flex-item-V {
 		width: 100%;
 		text-align: center;
@@ -232,13 +248,15 @@
 		padding: 50upx 0;
 		padding-right: 3%;
 	}
-	.uni-panel-icon-on{
+
+	.uni-panel-icon-on {
 		font-size: 36upx;
-		color:#C6CACE;
-		line-height:60upx;
+		color: #C6CACE;
+		line-height: 60upx;
 		padding-right: 3%;
 	}
-	.uni-panel-text{
+
+	.uni-panel-text {
 		font-size: 30upx;
 		webkit-box-flex: 1;
 		-webkit-flex: 1;
@@ -248,38 +266,44 @@
 		line-height: 60upx;
 		color: #C6CACE;
 	}
-	.uni-panel-icon{
-	}
-	.xieyi-icon{
+
+	.uni-panel-icon {}
+
+	.xieyi-icon {
 		background: url(../../static/img/xieyi.png) no-repeat left center;
 		padding-left: 18%;
 		background-size: 60upx 60upx;
 		background-position: 6% 0;
 	}
-	.zhengce-icon{
+
+	.zhengce-icon {
 		background: url(../../static/img/zhengce.png) no-repeat left center;
 		padding-left: 18%;
 		background-size: 60upx 60upx;
 		background-position: 6% 0;
 	}
-	.qianbao-icon{
+
+	.qianbao-icon {
 		background: url(../../static/img/qianbao2.png) no-repeat left center;
 		padding-left: 18%;
 		background-size: 60upx 60upx;
 		background-position: 6% 0;
 	}
-	.tuichu-icon{
+
+	.tuichu-icon {
 		background: url(../../static/img/tuichu.png) no-repeat left center;
 		padding-left: 18%;
 		background-size: 60upx 60upx;
 		background-position: 6% 0;
 	}
-	.header-list-box image{
+
+	.header-list-box image {
 		width: 100upx;
 		height: 100upx;
 	}
+
 	.header-list-box text {
-		display:block;
-		
+		display: block;
+
 	}
 </style>

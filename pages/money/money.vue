@@ -2,14 +2,14 @@
 	<view class="team-content">
 		<view class="team-head">
 			<view class="head-cont">
-				<view class="team-count team-zhitui">313213</view>
+				<view class="team-count team-zhitui">{{coin_balance}}</view>
 			</view>
 			<view class="head-cont">
-				<view class="team-count team-shanxia">31222</view>
+				<view class="team-count team-shanxia">{{score_balance}}</view>
 			</view>
 		</view>
 		<view class="btn-row">
-			<button type="primary" class="primary" @tap="findPassword">提现</button>
+			<button type="primary" class="primary">提现</button>
 		</view>
 	</view>
 </template>
@@ -18,8 +18,13 @@
 	export default {
 		data() {
 			return {
-				
+				coin_balance: 0,
+				score_balance: 0
 			}
+		},
+		onLoad(e) {
+			this.coin_balance = e.coin_balance
+			this.score_balance = e.score_balance
 		},
 		methods: {
 			
@@ -59,11 +64,11 @@
 		line-height: 8;
 	}
 	.team-zhitui{
-		background: url(../../static/img/yue.png) no-repeat;
+		background: url(../../static/img/xunibi.png) no-repeat;
 		background-size: 100% 100%;
 	}
 	.team-shanxia{
-		background: url(../../static/img/mingxi.png) no-repeat;
+		background: url(../../static/img/jifen.png) no-repeat;
 		background-size: 100% 100%;
 	}
 	
