@@ -69,7 +69,7 @@
                 "android" : {
                     "hdpi" : "unpackage/480*762.png",
                     "xhdpi" : "unpackage/720*1242.png",
-                    "xxhdpi" : "unpackage/1080*1882.png"
+                    "xxhdpi" : "unpackage/open-bg.png"
                 }
             },
             "icons" : {

@@ -40,7 +40,7 @@
 	.share-container{
 		width: 100%;
 		min-height: 100%;
-		background: url(../../static/img/1080*1882.png) no-repeat;
+		background: url(../../static/img/open-bg.png) no-repeat;
 		background-size: 100% 100%;
 	}
 	.share-warp{
