@@ -13,8 +13,25 @@
 				
 			}
 		},
+		onShow() {
+			this.getData()
+		},
 		methods: {
-			
+			getData () {
+				const that = this
+				const params = {
+					url: '/user/get_recommended_code',
+					method: 'get',
+					data: {
+						name: that.$storage.getStorage('name')
+					},
+					callback (res) {
+						console.log(res)
+					}
+				}
+				
+				this.$http.sendRequest(params)
+			}
 		}
 	}
 </script>

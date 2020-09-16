@@ -41,7 +41,8 @@
 					url: '/user/relationship',
 					method: 'get',
 					data: {
-						name: that.$storage.getStorage('name')
+						name: that.$storage.getStorage('name'),
+						size: 10000
 					},
 					callback (res) {
 						console.log(res)
